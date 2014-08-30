@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import de.webcodr.chartrack.BlizzardApi.Client;
 import de.webcodr.chartrack.Model.CharacterProfile;
 import de.webcodr.chartrack.Model.Hero;
+import de.webcodr.chartrack.Model.Progression;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -24,6 +25,8 @@ public class CharacterView extends Activity {
     private TextView txtBattleTag;
     private TextView txtTotalKills;
     private TextView txtParagonLevel;
+    private TextView txtMainCampaignState;
+    private TextView txtAddonCampaignState;
     private ListView listChars;
     private ArrayAdapter<String> listAdapter;
     private ArrayList<String> heroList;
@@ -43,6 +46,8 @@ public class CharacterView extends Activity {
         txtBattleTag = (TextView) findViewById(R.id.txtBattleNetId);
         txtParagonLevel = (TextView) findViewById(R.id.txtParagonLevel);
         txtTotalKills = (TextView) findViewById(R.id.txtTotalKills);
+        txtMainCampaignState = (TextView) findViewById(R.id.txtMainCampaignState);
+        txtAddonCampaignState = (TextView) findViewById(R.id.txtAddonCampaignState);
         listChars = (ListView) findViewById(R.id.listChars);
     }
 
@@ -60,14 +65,31 @@ public class CharacterView extends Activity {
                     @Override
                     public void failure(RetrofitError retrofitError) {
                         Toast.makeText(getApplicationContext(), retrofitError.getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
                 });
+    }
+
+    private void setCampaignState(CharacterProfile profile) {
+        Progression progression = profile.getProgression();
+        Boolean isMainCampaignCompleted = progression.hasCompletedMainCampaign();
+        Boolean isAddonCampaignCompleted = progression.hasCompletedAddonCampaign();
+
+        txtMainCampaignState.setText(formatCompletionState(isMainCampaignCompleted));
+        txtAddonCampaignState.setText(formatCompletionState(isAddonCampaignCompleted));
+    }
+
+    private String formatCompletionState(Boolean state) {
+        if(state) {
+            return "completed";
+        }
+
+        return "not completed";
     }
 
     private void setCharacterInfo(CharacterProfile profile) {
         txtTotalKills.setText(profile.getKills().toString());
         txtParagonLevel.setText(String.valueOf(profile.getParagonLevel()));
+        setCampaignState(profile);
     }
 
     private void setHeroList(CharacterProfile profile) {

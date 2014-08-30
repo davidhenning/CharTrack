@@ -57,4 +57,11 @@ public class Progression {
         this.act5 = act5;
     }
 
+    public Boolean hasCompletedMainCampaign() {
+        return getAct1() && getAct2() && getAct3() && getAct4();
+    }
+
+    public Boolean hasCompletedAddonCampaign() {
+        return getAct5();
+    }
 }
