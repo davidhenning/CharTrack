@@ -1,5 +1,6 @@
 machine:
   pre:
+    - pwd
     - chmod +x install-dependencies.sh
   environment:
     ANDROID_HOME: /home/ubuntu/android
