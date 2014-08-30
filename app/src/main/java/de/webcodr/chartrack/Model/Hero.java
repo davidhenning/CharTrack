@@ -25,7 +25,7 @@ public class Hero {
     private Boolean dead;
     @SerializedName("class")
     @Expose
-    private String _class;
+    private String className;
     @SerializedName("last-updated")
     @Expose
     private Integer lastUpdated;
@@ -94,12 +94,12 @@ public class Hero {
         this.dead = dead;
     }
 
-    public String getClass_() {
-        return _class;
+    public String getClassName() {
+        return className.substring(0, 1).toUpperCase() + className.substring(1);
     }
 
-    public void setClass_(String _class) {
-        this._class = _class;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public Integer getLastUpdated() {

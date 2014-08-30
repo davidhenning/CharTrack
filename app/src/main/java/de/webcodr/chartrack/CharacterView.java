@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import de.webcodr.chartrack.BlizzardApi.Client;
 import de.webcodr.chartrack.Model.CharacterProfile;
+import de.webcodr.chartrack.Model.Hero;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -19,6 +24,9 @@ public class CharacterView extends Activity {
     private TextView txtBattleTag;
     private TextView txtTotalKills;
     private TextView txtParagonLevel;
+    private ListView listChars;
+    private ArrayAdapter<String> listAdapter;
+    private ArrayList<String> heroList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,7 @@ public class CharacterView extends Activity {
         txtBattleTag = (TextView) findViewById(R.id.txtBattleNetId);
         txtParagonLevel = (TextView) findViewById(R.id.txtParagonLevel);
         txtTotalKills = (TextView) findViewById(R.id.txtTotalKills);
+        listChars = (ListView) findViewById(R.id.listChars);
     }
 
     private void download() {
@@ -47,6 +56,20 @@ public class CharacterView extends Activity {
 
                         txtTotalKills.setText(result.getKills().toString());
                         txtParagonLevel.setText(String.valueOf(result.getParagonLevel()));
+
+                        heroList = new ArrayList<String>();
+
+                        for(Hero hero : result.getHeroes()) {
+                            String heroName = String.format(
+                                    "%s: %s (Level %d)",
+                                    hero.getName(),
+                                    hero.getClassName(),
+                                    hero.getLevel());
+                            heroList.add(heroName);
+                        }
+
+                        listAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.hero_view, R.id.charName, heroList);
+                        listChars.setAdapter(listAdapter);
                     }
 
                     @Override

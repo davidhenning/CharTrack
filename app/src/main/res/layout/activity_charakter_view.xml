@@ -57,7 +57,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Total Kills:" />
+                android:text="Total Kills:"
+                android:paddingTop="@dimen/activity_horizontal_margin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,6 +91,20 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Characters:"
+            android:id="@+id/txtChars"
+            android:paddingTop="@dimen/activity_horizontal_margin" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listChars" />
+
     </LinearLayout>
 
 </LinearLayout>
