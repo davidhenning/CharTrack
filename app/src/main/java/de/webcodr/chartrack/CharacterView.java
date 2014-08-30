@@ -53,23 +53,8 @@ public class CharacterView extends Activity {
                     @Override
                     public void success(CharacterProfile result, Response response) {
                         Toast.makeText(getApplicationContext(), result.getBattleTag() + " Loaded! Status Code:" + response.getStatus(), Toast.LENGTH_SHORT).show();
-
-                        txtTotalKills.setText(result.getKills().toString());
-                        txtParagonLevel.setText(String.valueOf(result.getParagonLevel()));
-
-                        heroList = new ArrayList<String>();
-
-                        for(Hero hero : result.getHeroes()) {
-                            String heroName = String.format(
-                                    "%s: %s (Level %d)",
-                                    hero.getName(),
-                                    hero.getClassName(),
-                                    hero.getLevel());
-                            heroList.add(heroName);
-                        }
-
-                        listAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.hero_view, R.id.charName, heroList);
-                        listChars.setAdapter(listAdapter);
+                        setCharacterInfo(result);
+                        setHeroList(result);
                     }
 
                     @Override
@@ -80,6 +65,26 @@ public class CharacterView extends Activity {
                 });
     }
 
+    private void setCharacterInfo(CharacterProfile profile) {
+        txtTotalKills.setText(profile.getKills().toString());
+        txtParagonLevel.setText(String.valueOf(profile.getParagonLevel()));
+    }
+
+    private void setHeroList(CharacterProfile profile) {
+        heroList = new ArrayList<String>();
+
+        for(Hero hero : profile.getHeroes()) {
+            String heroName = String.format(
+                    "%s: %s (Level %d)",
+                    hero.getName(),
+                    hero.getClassName(),
+                    hero.getLevel());
+            heroList.add(heroName);
+        }
+
+        listAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.hero_view, R.id.charName, heroList);
+        listChars.setAdapter(listAdapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
