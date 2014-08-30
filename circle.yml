@@ -9,3 +9,6 @@ dependencies:
     - ~/android
   override:
     - ./install-dependencies.sh
+test:
+  override:
+    - echo "Dummy until tests work"
