@@ -34,7 +34,7 @@ public class CharacterView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_charakter_view);
+        setContentView(R.layout.activity_character_view);
 
         findViewById(R.id.buttonGetProfile).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +111,7 @@ public class CharacterView extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.charakter_view, menu);
+        getMenuInflater().inflate(R.menu.character_view, menu);
         return true;
     }
 
