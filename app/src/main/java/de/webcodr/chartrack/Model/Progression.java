@@ -57,11 +57,19 @@ public class Progression {
         this.act5 = act5;
     }
 
-    public Boolean hasCompletedMainCampaign() {
+    public CampaignState getMainCampaignState() {
+        return new CampaignState(hasCompletedMainCampaign());
+    }
+
+    public CampaignState getAddonCampaignState() {
+        return new CampaignState(hasCompletedAddonCampaign());
+    }
+
+    private Boolean hasCompletedMainCampaign() {
         return getAct1() && getAct2() && getAct3() && getAct4();
     }
 
-    public Boolean hasCompletedAddonCampaign() {
+    private Boolean hasCompletedAddonCampaign() {
         return getAct5();
     }
 }

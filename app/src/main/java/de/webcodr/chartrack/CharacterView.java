@@ -10,12 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import de.webcodr.chartrack.BlizzardApi.Client;
 import de.webcodr.chartrack.CharacterViewActivity.HeroAdapter;
+import de.webcodr.chartrack.Model.CampaignState;
 import de.webcodr.chartrack.Model.CharacterProfile;
-import de.webcodr.chartrack.Model.Hero;
 import de.webcodr.chartrack.Model.Progression;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -28,7 +26,7 @@ public class CharacterView extends Activity {
     private TextView txtParagonLevel;
     private TextView txtMainCampaignState;
     private TextView txtAddonCampaignState;
-    private ListView listChars;
+    private ListView listCharacters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public class CharacterView extends Activity {
         txtTotalKills = (TextView) findViewById(R.id.txtTotalKills);
         txtMainCampaignState = (TextView) findViewById(R.id.txtMainCampaignState);
         txtAddonCampaignState = (TextView) findViewById(R.id.txtAddonCampaignState);
-        listChars = (ListView) findViewById(R.id.listChars);
+        listCharacters = (ListView) findViewById(R.id.listChars);
     }
 
     private void download() {
@@ -70,19 +68,11 @@ public class CharacterView extends Activity {
 
     private void setCampaignState(CharacterProfile profile) {
         Progression progression = profile.getProgression();
-        Boolean isMainCampaignCompleted = progression.hasCompletedMainCampaign();
-        Boolean isAddonCampaignCompleted = progression.hasCompletedAddonCampaign();
+        CampaignState mainCampaignState = progression.getMainCampaignState();
+        CampaignState addonCampaignState = progression.getAddonCampaignState();
 
-        txtMainCampaignState.setText(formatCompletionState(isMainCampaignCompleted));
-        txtAddonCampaignState.setText(formatCompletionState(isAddonCampaignCompleted));
-    }
-
-    private String formatCompletionState(Boolean state) {
-        if (state) {
-            return "completed";
-        }
-
-        return "not completed";
+        txtMainCampaignState.setText(mainCampaignState.toString());
+        txtAddonCampaignState.setText(addonCampaignState.toString());
     }
 
     private void setCharacterInfo(CharacterProfile profile) {
@@ -93,7 +83,7 @@ public class CharacterView extends Activity {
 
     private void setHeroList(CharacterProfile profile) {
         ListAdapter heroListAdapter = new HeroAdapter(getApplicationContext(), profile.getHeroes());
-        listChars.setAdapter(heroListAdapter);
+        listCharacters.setAdapter(heroListAdapter);
     }
 
     @Override
