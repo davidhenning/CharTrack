@@ -19,7 +19,7 @@ public class CharacterProfile {
     @Expose
     private Integer paragonLevelSeasonHardcore;
     @Expose
-    private List<Hero> heroes = new ArrayList<Hero>();
+    private ArrayList<Hero> heroes = new ArrayList<Hero>();
     @Expose
     private Integer lastHeroPlayed;
     @Expose
@@ -101,11 +101,11 @@ public class CharacterProfile {
         this.paragonLevelSeasonHardcore = paragonLevelSeasonHardcore;
     }
 
-    public List<Hero> getHeroes() {
+    public ArrayList<Hero> getHeroes() {
         return heroes;
     }
 
-    public void setHeroes(List<Hero> heroes) {
+    public void setHeroes(ArrayList<Hero> heroes) {
         this.heroes = heroes;
     }
 
