@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +29,6 @@ public class CharacterView extends Activity {
     private TextView txtMainCampaignState;
     private TextView txtAddonCampaignState;
     private ListView listChars;
-    private HeroAdapter listAdapter;
-    private ArrayList<Hero> heroList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,14 +92,8 @@ public class CharacterView extends Activity {
     }
 
     private void setHeroList(CharacterProfile profile) {
-        heroList = new ArrayList<Hero>();
-
-        for (Hero hero : profile.getHeroes()) {
-            heroList.add(hero);
-        }
-
-        listAdapter = new HeroAdapter(getApplicationContext(), heroList);
-        listChars.setAdapter(listAdapter);
+        ListAdapter heroListAdapter = new HeroAdapter(getApplicationContext(), profile.getHeroes());
+        listChars.setAdapter(heroListAdapter);
     }
 
     @Override
