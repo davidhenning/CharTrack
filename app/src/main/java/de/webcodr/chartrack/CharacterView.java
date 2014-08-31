@@ -13,6 +13,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import de.webcodr.chartrack.BlizzardApi.Client;
+import de.webcodr.chartrack.CharacterViewActivity.HeroAdapter;
 import de.webcodr.chartrack.Model.CharacterProfile;
 import de.webcodr.chartrack.Model.Hero;
 import de.webcodr.chartrack.Model.Progression;
@@ -28,8 +29,8 @@ public class CharacterView extends Activity {
     private TextView txtMainCampaignState;
     private TextView txtAddonCampaignState;
     private ListView listChars;
-    private ArrayAdapter<String> listAdapter;
-    private ArrayList<String> heroList;
+    private HeroAdapter listAdapter;
+    private ArrayList<Hero> heroList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,18 +94,13 @@ public class CharacterView extends Activity {
     }
 
     private void setHeroList(CharacterProfile profile) {
-        heroList = new ArrayList<String>();
+        heroList = new ArrayList<Hero>();
 
         for(Hero hero : profile.getHeroes()) {
-            String heroName = String.format(
-                    "%s: %s (Level %d)",
-                    hero.getName(),
-                    hero.getClassName(),
-                    hero.getLevel());
-            heroList.add(heroName);
+            heroList.add(hero);
         }
 
-        listAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.hero_view, R.id.charName, heroList);
+        listAdapter = new HeroAdapter(getApplicationContext(), heroList);
         listChars.setAdapter(listAdapter);
     }
 
