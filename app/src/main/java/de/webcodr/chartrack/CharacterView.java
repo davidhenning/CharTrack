@@ -39,7 +39,7 @@ public class CharacterView extends Activity {
         findViewById(R.id.buttonGetProfile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                download();
+            download();
             }
         });
 
@@ -53,20 +53,20 @@ public class CharacterView extends Activity {
 
     private void download() {
         Client.
-                getClient().
-                getUserProfile(txtBattleTag.getText().toString(), new Callback<CharacterProfile>() {
-                    @Override
-                    public void success(CharacterProfile result, Response response) {
-                        Toast.makeText(getApplicationContext(), result.getBattleTag() + " Loaded! Status Code:" + response.getStatus(), Toast.LENGTH_SHORT).show();
-                        setCharacterInfo(result);
-                        setHeroList(result);
-                    }
+            getClient().
+            getUserProfile(txtBattleTag.getText().toString(), new Callback<CharacterProfile>() {
+                @Override
+                public void success(CharacterProfile result, Response response) {
+                    Toast.makeText(getApplicationContext(), result.getBattleTag() + " Loaded! Status Code:" + response.getStatus(), Toast.LENGTH_SHORT).show();
+                    setCharacterInfo(result);
+                    setHeroList(result);
+                }
 
-                    @Override
-                    public void failure(RetrofitError retrofitError) {
-                        Toast.makeText(getApplicationContext(), retrofitError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                @Override
+                public void failure(RetrofitError retrofitError) {
+                    Toast.makeText(getApplicationContext(), retrofitError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     private void setCampaignState(CharacterProfile profile) {
