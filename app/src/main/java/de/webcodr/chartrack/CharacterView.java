@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View;
 
 import java.util.ArrayList;
 
@@ -80,7 +79,7 @@ public class CharacterView extends Activity {
     }
 
     private String formatCompletionState(Boolean state) {
-        if(state) {
+        if (state) {
             return "completed";
         }
 
@@ -96,7 +95,7 @@ public class CharacterView extends Activity {
     private void setHeroList(CharacterProfile profile) {
         heroList = new ArrayList<Hero>();
 
-        for(Hero hero : profile.getHeroes()) {
+        for (Hero hero : profile.getHeroes()) {
             heroList.add(hero);
         }
 
