@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import de.webcodr.chartrack.BlizzardApi.Client;
 import de.webcodr.chartrack.CharacterViewActivity.HeroAdapter;
-import de.webcodr.chartrack.Model.CampaignState;
 import de.webcodr.chartrack.Model.CharacterProfile;
 import de.webcodr.chartrack.Model.Progression;
 import retrofit.Callback;
@@ -24,8 +23,8 @@ public class CharacterView extends Activity {
     private TextView txtBattleTag;
     private TextView txtTotalKills;
     private TextView txtParagonLevel;
-    private TextView txtMainCampaignState;
-    private TextView txtAddonCampaignState;
+    private TextView txtLabelCampaignMain;
+    private TextView txtLabelCampaignAddon;
     private ListView listCharacters;
 
     @Override
@@ -43,8 +42,8 @@ public class CharacterView extends Activity {
         txtBattleTag = (TextView) findViewById(R.id.txtBattleNetId);
         txtParagonLevel = (TextView) findViewById(R.id.txtParagonLevel);
         txtTotalKills = (TextView) findViewById(R.id.txtTotalKills);
-        txtMainCampaignState = (TextView) findViewById(R.id.txtMainCampaignState);
-        txtAddonCampaignState = (TextView) findViewById(R.id.txtAddonCampaignState);
+        txtLabelCampaignMain = (TextView) findViewById(R.id.txtLabelCampaignMain);
+        txtLabelCampaignAddon = (TextView) findViewById(R.id.txtLabelCampaignAddon);
         listCharacters = (ListView) findViewById(R.id.listChars);
     }
 
@@ -68,11 +67,17 @@ public class CharacterView extends Activity {
 
     private void setCampaignState(CharacterProfile profile) {
         Progression progression = profile.getProgression();
-        CampaignState mainCampaignState = progression.getMainCampaignState();
-        CampaignState addonCampaignState = progression.getAddonCampaignState();
 
-        txtMainCampaignState.setText(mainCampaignState.toString());
-        txtAddonCampaignState.setText(addonCampaignState.toString());
+        setCampaignStateLabelColor(txtLabelCampaignMain, progression.hasCompletedMainCampaign());
+        setCampaignStateLabelColor(txtLabelCampaignAddon, progression.hasCompletedAddonCampaign());
+    }
+
+    private void setCampaignStateLabelColor(TextView label, Boolean campaignState) {
+        if (campaignState) {
+            label.setTextColor(getResources().getColor(android.R.color.black));
+        } else {
+            label.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        }
     }
 
     private void setCharacterInfo(CharacterProfile profile) {

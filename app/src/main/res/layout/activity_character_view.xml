@@ -111,42 +111,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Diablo 3:"
+                android:text="Diablo 3"
                 android:id="@+id/txtLabelCampaignMain"
-                android:paddingTop="3dp" />
+                android:paddingTop="3dp"
+                android:textColor="@android:color/darker_gray" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="not completed"
-                android:id="@+id/txtMainCampaignState"
-                android:paddingLeft="@dimen/activity_vertical_margin" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Reaper of Souls:"
+                android:text="Reaper of Souls"
                 android:id="@+id/txtLabelCampaignAddon"
                 android:paddingTop="3dp"
-                android:layout_gravity="right" />
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/darker_gray" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="not completed"
-                android:id="@+id/txtAddonCampaignState"
-                android:paddingLeft="@dimen/activity_vertical_margin"
-                android:paddingTop="3dp" />
         </LinearLayout>
 
         <TextView

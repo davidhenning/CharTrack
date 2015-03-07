@@ -1,8 +1,6 @@
 package de.webcodr.chartrack.Model;
 
-
 import com.google.gson.annotations.Expose;
-
 
 public class Progression {
 
@@ -57,19 +55,11 @@ public class Progression {
         this.act5 = act5;
     }
 
-    public CampaignState getMainCampaignState() {
-        return new CampaignState(hasCompletedMainCampaign());
-    }
-
-    public CampaignState getAddonCampaignState() {
-        return new CampaignState(hasCompletedAddonCampaign());
-    }
-
-    private Boolean hasCompletedMainCampaign() {
+    public Boolean hasCompletedMainCampaign() {
         return getAct1() && getAct2() && getAct3() && getAct4();
     }
 
-    private Boolean hasCompletedAddonCampaign() {
+    public Boolean hasCompletedAddonCampaign() {
         return getAct5();
     }
 }
